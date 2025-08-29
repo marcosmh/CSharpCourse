@@ -36,10 +36,10 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=******" \
 ### Notas
 
 - para windows
-* dotnet add package Microsoft.Data.SqlClient 
+  dotnet add package Microsoft.Data.SqlClient 
 
 - para mac os
-* dotnet add package System.Data.SqlClient --version 4.9.0
+  dotnet add package System.Data.SqlClient --version 4.9.0
 
 * Ejecutar la conexion desde la consola en Windows
 Scaffold-DbContext "Server=localhost; Database=CsharpBD; User=sa; Password=******;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer
