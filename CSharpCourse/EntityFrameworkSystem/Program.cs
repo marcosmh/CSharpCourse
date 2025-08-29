@@ -1,6 +1,7 @@
 ﻿using BD;
 using BD.Data;
 using BD.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -17,20 +18,6 @@ namespace EntityFrameworkSystem
 
             bool again = true;
             int op = 0;
-
-            /*
-            using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
-            {
-
-                var beers = context.Beers.ToList();
-
-                foreach (var beer in beers)
-                {
-                    Console.WriteLine($"Id: {beer.Id} - Name: {beer.Name} ");
-                }
-
-            }
-            */
 
             do
             {
@@ -81,20 +68,35 @@ namespace EntityFrameworkSystem
             Console.Clear();
             Console.WriteLine("\n -- Lista de Cervezas -- ");
 
-            using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
+            try
             {
-                //List<Beer> beers = context.Beers.OrderBy(b => b.Name).ToList();
-                List<Beer> beers = (from b in context.Beers
-                                   //where b.BrandId == 2
-                                  orderby b.Name
-                                  select b).ToList()
-                                  ;
 
-                foreach (var beer in beers)
+                using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
                 {
-                    Console.WriteLine($"Id: {beer.Id} - Name: {beer.Name} - Marca: {beer.Brand.Name}  ");
+                    //List<Beer> beers = context.Beers.OrderBy(b => b.Name).ToList();
+                    List<Beer> beers = (from b in context.Beers
+                                            //where b.BrandId == 2
+                                        orderby b.Name
+                                        select b).ToList()
+                                      ;
+
+                    foreach (var beer in beers)
+                    {
+                        Console.WriteLine($"Id: {beer.Id} - Name: {beer.Name} - Marca: {beer.Brand.Name}  ");
+                    }
+
                 }
 
+            }
+            catch(SqlException se)
+            {
+                var msg = "Ha ocurrido un error en la base de datos.\n";
+                Console.WriteLine(msg + " [ " + se + " ]");
+            }
+            catch(Exception e)
+            {
+                var msg = "Ha ocurrido un error.\n";
+                Console.WriteLine(msg + " [ " + e + " ]");
             }
 
         }
@@ -108,16 +110,32 @@ namespace EntityFrameworkSystem
             Console.WriteLine("Escribe el id de la Marca");
             int brandId = int.Parse(Console.ReadLine());
 
-            using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
+            try
             {
-                Beer beer = new Beer();
-                beer.Name = name;
-                beer.BrandId = brandId;
 
-                context.Add(beer);
-                context.SaveChanges();
-                Console.WriteLine("La Cerveza se guardo correctamente!!");
-            }            
+                using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
+                {
+                    Beer beer = new Beer();
+                    beer.Name = name;
+                    beer.BrandId = brandId;
+
+                    context.Add(beer);
+                    context.SaveChanges();
+                    Console.WriteLine("La Cerveza se guardo correctamente!!");
+                }
+
+
+            }
+            catch (SqlException se)
+            {
+                var msg = "Ha ocurrido un error en la base de datos.\n";
+                Console.WriteLine(msg + " [ " + se + " ]");
+            }
+            catch (Exception e)
+            {
+                var msg = "Ha ocurrido un error.\n";
+                Console.WriteLine(msg + " [ " + e + " ]");
+            }
 
         }
 
@@ -130,29 +148,43 @@ namespace EntityFrameworkSystem
             Console.WriteLine("Escribe el id de la Cerveza a Editar: ");
             int id = int.Parse(Console.ReadLine());
 
-
-            using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
+            try
             {
-                Beer beer = context.Beers.Find(id);
 
-                if (beer != null)
+                using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
                 {
-                    Console.WriteLine("Escribe el nombre: ");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Escribe el id de la Marca: ");
-                    int brandId = int.Parse(Console.ReadLine());
+                    Beer beer = context.Beers.Find(id);
 
-                    beer.Name = name;
-                    beer.BrandId = brandId;
+                    if (beer != null)
+                    {
+                        Console.WriteLine("Escribe el nombre: ");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("Escribe el id de la Marca: ");
+                        int brandId = int.Parse(Console.ReadLine());
 
-                    context.Entry(beer).State = EntityState.Modified;
-                    context.SaveChanges();
-                    Console.WriteLine("La Cerveza se editó correctamente!!");
+                        beer.Name = name;
+                        beer.BrandId = brandId;
+
+                        context.Entry(beer).State = EntityState.Modified;
+                        context.SaveChanges();
+                        Console.WriteLine("La Cerveza se editó correctamente!!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("La Cerveza no existe!!");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("La Cerveza no existe!!");
-                }
+
+            }
+            catch (SqlException se)
+            {
+                var msg = "Ha ocurrido un error en la base de datos.\n";
+                Console.WriteLine(msg + " [ " + se + " ]");
+            }
+            catch (Exception e)
+            {
+                var msg = "Ha ocurrido un error.\n";
+                Console.WriteLine(msg + " [ " + e + " ]");
             }
 
         }
@@ -165,20 +197,35 @@ namespace EntityFrameworkSystem
             Console.WriteLine("Escribe el id de la Cerveza a eliminar: ");
             int id = int.Parse(Console.ReadLine());
 
-            using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
+            try
             {
-                Beer beer = context.Beers.Find(id);
 
-                if (beer != null)
+                using (CsharpContext context = new CsharpContext(optionsBuilder.Options))
                 {
-                    context.Remove(beer);
-                    context.SaveChanges();
-                    Console.WriteLine("La Cerveza se eliminó correctamente!!");
+                    Beer beer = context.Beers.Find(id);
+
+                    if (beer != null)
+                    {
+                        context.Remove(beer);
+                        context.SaveChanges();
+                        Console.WriteLine("La Cerveza se eliminó correctamente!!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("La Cerveza no existe!!");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("La Cerveza no existe!!");
-                }
+
+            }
+            catch (SqlException se)
+            {
+                var msg = "Ha ocurrido un error en la base de datos.\n";
+                Console.WriteLine(msg + " [ " + se + " ]");
+            }
+            catch (Exception e)
+            {
+                var msg = "Ha ocurrido un error.\n";
+                Console.WriteLine(msg + " [ " + e + " ]");
             }
                 
         }
