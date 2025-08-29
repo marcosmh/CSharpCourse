@@ -47,6 +47,8 @@ Scaffold-DbContext "Server=localhost; Database=CsharpBD; User=sa; Password=*****
 * Ejecutar la conexion desde la consola en Mac Os
 dotnet ef dbcontext scaffold "Server=localhost;Database=CsharpBD;User=sa;Password=Admindba\$;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --context-dir Data --context CsharpContext --force
 
+* Pra el proyecto de EntityFrameworkSystem se debe agregar la
+  referencia de BD
 
 
 
