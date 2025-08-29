@@ -4,8 +4,8 @@
 
 
 ### .Net
-* SDK DE .NET:
- - Version:   7.0.317
+* SDK DE .NET: 
+	-- Version: 7.0.317
 
 * Entorno de tiempo de ejecución:
   - OS Name:     Mac OS X
@@ -35,6 +35,12 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=******" \
 
 
 ### Notas
+
+- para windows
+* dotnet add package Microsoft.Data.SqlClient 
+
+- para mac os
+* dotnet add package System.Data.SqlClient --version 4.9.0
 
 * Ejecutar la conexion desde la consola en Windows
 Scaffold-DbContext "Server=localhost; Database=CsharpBD; User=sa; Password=******;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer
