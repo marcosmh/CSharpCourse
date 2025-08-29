@@ -4,7 +4,22 @@
 ---------------
 
 ### .Net
-- Version = SDK 7.0.317
+SDK DE .NET:
+ Version:   7.0.317
+ Commit:    9dcd7deb92
+
+Entorno de tiempo de ejecución:
+ OS Name:     Mac OS X
+ OS Version:  13.6
+ OS Platform: Darwin
+ RID:         osx.13-x64
+ Base Path:   /usr/local/share/dotnet/sdk/7.0.317/
+
+Host:
+  Version:      7.0.20
+  Architecture: x64
+
+
 
 ### Instalar dependencias en Mac OS
  * colocarse en la ruta del proyecto: /Users/markcode/Projects/CSharpCourse/BD
@@ -16,7 +31,7 @@
 Docker —> SQL SERVER 2022
 
 * Descarga la imagen de SQL Server Developer
-docker pull mcr.microsoft.com/mssql/server:2022-latest
+  docker pull mcr.microsoft.com/mssql/server:2022-latest
 
 * Ejecuta el contenedor
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=******" \
