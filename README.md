@@ -35,10 +35,10 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=******" \
 
 ### Notas
 
-- para windows
+- para windows:
   dotnet add package Microsoft.Data.SqlClient 
 
-- para mac os
+- para mac os:
   dotnet add package System.Data.SqlClient --version 4.9.0
 
 * Ejecutar la conexion desde la consola en Windows
