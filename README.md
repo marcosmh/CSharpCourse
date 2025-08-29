@@ -11,8 +11,6 @@
   - OS Name:     Mac OS X
   - OS Version:  13.6
   - OS Platform: Darwin
-  - RID:         osx.13-x64
-  - Base Path:   /usr/local/share/dotnet/sdk/7.0.317/
   - Architecture: x64
 
 * Visual Studio 2022 para Mac OS
