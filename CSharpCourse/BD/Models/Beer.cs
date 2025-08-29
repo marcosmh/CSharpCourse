@@ -13,5 +13,5 @@ public partial class Beer
 
     public virtual Beer? Brand { get; set; }
 
-    //public virtual ICollection<Beer> InverseBrand { get; set; } = new List<Beer>();
+    public virtual ICollection<Beer> InverseBrand { get; set; } = new List<Beer>();
 }
