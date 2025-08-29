@@ -5,7 +5,7 @@
 
 ### .Net
 * SDK DE .NET: 
-	-- Version: 7.0.317
+	- Version: 7.0.317
 
 * Entorno de tiempo de ejecución:
   - OS Name:     Mac OS X
@@ -15,6 +15,7 @@
   - Base Path:   /usr/local/share/dotnet/sdk/7.0.317/
   - Architecture: x64
 
+* Visual Studio 2022 para Mac OS
 
 ### Instalar dependencias en Mac OS
  * colocarse en la ruta del proyecto: /Users/markcode/Projects/CSharpCourse/BD
